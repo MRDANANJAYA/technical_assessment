@@ -3,15 +3,15 @@
 import 'package:technical_assessment/Service/ApiService/science_api_service.dart';
 import 'package:technical_assessment/Service/Models/science_model.dart';
 
-class ScienceViewModel{
+class CategoryViewModel{
 
 
-Future<ScienceModel> getScienceData(String category) async {
-  ScienceModel scienceModel = ScienceModel();
+Future<CategoryModel> getScienceData(String category) async {
+  CategoryModel scienceModel = CategoryModel();
   ScienceApiService scienceApiService = ScienceApiService();
   final response = await scienceApiService.getCustomerDetails(category);
   try{
-    scienceModel = ScienceModel.fromJson(response.data);
+    scienceModel = CategoryModel.fromJson(response.data);
   }catch(e){
     rethrow;
   }

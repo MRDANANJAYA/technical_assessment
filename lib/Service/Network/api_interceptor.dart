@@ -31,7 +31,7 @@ dynamic requestInterceptor(
     RequestOptions options, RequestInterceptorHandler handler) async {
   if (kDebugMode) {
     print("hit request interceptor");
-    print("data => \n ${options.data}");
+    print("data => \n ${options.queryParameters}");
     print("Request url => ${options.baseUrl + options.path}");
   }
   return handler.next(options);
@@ -64,4 +64,5 @@ dynamic errorInterceptorHandler(
     print("hit error interceptor");
     print("Error => \n$dioError");
   }
+  return handler.next(dioError);
 }

@@ -23,7 +23,7 @@ class ScienceApiService{
         print("Api Request Error => $e");
       }
 
-      rethrow;
+      return Future.error(e);
     }
 
     }

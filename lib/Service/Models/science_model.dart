@@ -1,18 +1,18 @@
 
-class ScienceModel {
-  ScienceModel({
+class CategoryModel {
+  CategoryModel({
     this.category,
     this.data,
     this.success,
   });
 
   String? category;
-  List<ScienceDatum>? data;
+  List<CategoryDatum>? data;
   bool? success;
 
-  factory ScienceModel.fromJson(Map<String, dynamic> json) => ScienceModel(
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
     category: json["category"],
-    data: List<ScienceDatum>.from(json["data"].map((x) => ScienceDatum.fromJson(x))),
+    data: List<CategoryDatum>.from(json["data"].map((x) => CategoryDatum.fromJson(x))),
     success: json["success"],
   );
 
@@ -23,8 +23,8 @@ class ScienceModel {
   };
 }
 
-class ScienceDatum {
-  ScienceDatum({
+class CategoryDatum {
+  CategoryDatum({
     this.author,
     this.content,
     this.date,
@@ -46,7 +46,7 @@ class ScienceDatum {
   String? title;
   String? url;
 
-  factory ScienceDatum.fromJson(Map<String, dynamic> json) => ScienceDatum(
+  factory CategoryDatum.fromJson(Map<String, dynamic> json) => CategoryDatum(
     author: json["author"],
     content: json["content"],
     date: json["date"],
