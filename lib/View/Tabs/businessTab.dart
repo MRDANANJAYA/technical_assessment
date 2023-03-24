@@ -56,7 +56,7 @@ class _BusinessTabState extends State<BusinessTab> {
       }
     }).onError((error, stackTrace) {
       if(mounted){
-        onFailure(error, context);
+        onFailure(error, context,(){ getData('business');});
         setState(() {
           isLoading = false;
         });

@@ -46,7 +46,7 @@ class _ScienceTabState extends State<ScienceTab> {
       }
     }).onError((error, stackTrace) {
       if(mounted){
-        onFailure(error, context);
+        onFailure(error, context,(){ getData('science');});
         setState(() {
           isLoading = false;
         });

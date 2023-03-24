@@ -55,7 +55,7 @@ class _TechnologyTabState extends State<TechnologyTab> {
 
     }).onError((error, stackTrace) {
       if(mounted){
-        onFailure(error, context);
+        onFailure(error, context,(){ getData('technology');});
         setState(() {
           isLoading = false;
         });
