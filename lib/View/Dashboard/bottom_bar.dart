@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:technical_assessment/View/Content/science_tab.dart';
 
 import '../../Util/media.dart';
-import '../Content/technologyTab.dart';
+import '../Tabs/businessTab.dart';
+import '../Tabs/scienceTab.dart';
+import '../Tabs/technologyTab.dart';
 
 
 
@@ -20,6 +21,7 @@ class _BottomBarState extends State<BottomBar> {
   List categories = [
     const ScienceTab(),
     const TechnologyTab(),
+    const BusinessTab(),
   ];
 
   @override
@@ -88,6 +90,32 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
+              Expanded(
+                flex: 1,
+                child: MaterialButton(
+                  padding: const EdgeInsets.all(0),
+                  minWidth: 0,
+                  shape: const CircleBorder(),
+                  onPressed: () {
+                    setState(
+                          () {
+                        selectedIndex = 2;
+                      },
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      bottomMatBt(
+                        Icons.person_outline_rounded,
+                        'Business',
+                        selectedIndex == 2,
+                      )
+
+                    ],
+                  ),
+                ),
+              ),
 
             ],
           ),
@@ -114,8 +142,8 @@ class _BottomBarState extends State<BottomBar> {
             title,
             style: TextStyle(
               fontSize: isSelected ? width /28 : width /33 ,
-              fontWeight: isSelected? FontWeight.normal : FontWeight.bold ,
-              color: isSelected? Colors.orange.withOpacity(0.5):Colors.grey.withOpacity(0.5),
+              fontWeight: isSelected? FontWeight.bold : FontWeight.normal ,
+              color: isSelected? Colors.orange.withOpacity(0.7):Colors.grey.withOpacity(1),
             ),
           ),
         )

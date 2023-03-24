@@ -1,0 +1,140 @@
+
+
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:technical_assessment/Service/ViewModels/category_view_model.dart';
+
+import '../../Service/Models/science_model.dart';
+import '../../Util/media.dart';
+import '../Widget/item_card_widget.dart';
+import '../Widget/loading_widget.dart';
+
+
+class TechnologyTab extends StatefulWidget {
+
+  const TechnologyTab({Key? key,}) : super(key: key);
+
+  @override
+  State<TechnologyTab> createState() => _TechnologyTabState();
+}
+
+class _TechnologyTabState extends State<TechnologyTab> {
+
+  CategoryViewModel categoryViewModel = CategoryViewModel();
+  @override
+  void initState() {
+    super.initState();
+    getData('technology');
+  }
+
+  List<CategoryDatum> itemList =[];
+  bool isLoading = true;
+
+//get response from api
+  void getData(String category)async{
+    if(mounted){
+      setState(() {
+        isLoading = true;
+      });
+    }
+    await categoryViewModel.getScienceData(category).then((value) {
+
+      if(value.data != null){
+        value.data?.forEach((element) {
+          if(mounted){
+            setState(() {
+              itemList.add(element);
+            });
+          }
+
+
+        });
+      }
+
+    }).onError((error, stackTrace) => onFailure(error));
+
+    if(mounted){
+      setState(() {
+        isLoading = false;
+      });
+    }
+
+  }
+
+  onFailure(error){
+    if (kDebugMode) {
+      print("Some error ====> $error");
+    }
+  }
+
+  @override
+  void dispose() {
+    isLoading = true;
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return  Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const SizedBox(height: 50,),
+            const Text('News' , style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,)),
+            const Spacer(),
+            Container(
+              padding: const EdgeInsets.only(left: 10, right: 10,top: 10),
+              height: height /1.3,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),),
+                color: Colors.white,),
+              width: width,
+              child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                direction: Axis.vertical,
+                children: [
+                  Padding(padding: const EdgeInsets.only(left: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 30,),
+                        const Text('Technology',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                        Text("Here is Your technology News",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black.withOpacity(0.6),fontSize: 14),),
+                        const SizedBox(height: 30,),
+                      ],
+                    ),
+                  ),
+
+                  Visibility(
+                      visible: isLoading,
+                      child: const LoadingWidget()),
+
+                  Flexible(flex: 10,child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: itemList.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        return ItemCardWidget(
+                          item: itemList[index],
+                        );
+                      }),)
+
+
+
+
+                ],
+              ),
+            ),
+
+          ],
+        )
+      ],
+    );
+  }
+}

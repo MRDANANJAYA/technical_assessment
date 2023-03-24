@@ -2,15 +2,14 @@
 
 A new Flutter project.
 
-## Getting Started
+## TECHNICAL ASSESSMENT
 
-This project is a starting point for a Flutter application.
+This project is TECHNICAL ASSESSMENT (Mobile - Flutter).
 
-A few resources to get you started if this is your first Flutter project:
+ resources I have used for this Flutter project: Dio
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ all backend are in Service Folder  
+    
+
+
