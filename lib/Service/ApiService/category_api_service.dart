@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../Network/api_interceptor.dart';
 
-class ScienceApiService{
+class CategoryApiService{
 
   final Dio _apiClient = ApiInterceptor().client;
 
@@ -19,10 +19,6 @@ class ScienceApiService{
       return response;
 
     } catch (e) {
-      if (kDebugMode) {
-        print("Api Request Error => $e");
-      }
-
       return Future.error(e);
     }
 

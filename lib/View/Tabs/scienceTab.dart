@@ -4,6 +4,7 @@ import 'package:technical_assessment/Service/ViewModels/category_view_model.dart
 
 import '../../Service/Models/science_model.dart';
 import '../../Util/media.dart';
+import '../Widget/error_widget.dart';
 import '../Widget/item_card_widget.dart';
 import '../Widget/loading_widget.dart';
 
@@ -43,20 +44,25 @@ class _ScienceTabState extends State<ScienceTab> {
           }
         });
       }
-    }).onError((error, stackTrace) => onFailure(error));
+    }).onError((error, stackTrace) {
+      onFailure(error, context);
+      if(mounted){
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }).whenComplete(() {
+      if(mounted){
+        setState(() {
+          isLoading = false;
+        });
+      }
+    });
 
-    if(mounted){
-      setState(() {
-        isLoading = false;
-      });
-    }
+
   }
 
-  onFailure(error){
-    if (kDebugMode) {
-      print("Some error ====> $error");
-    }
-  }
+
 
   @override
   void dispose() {

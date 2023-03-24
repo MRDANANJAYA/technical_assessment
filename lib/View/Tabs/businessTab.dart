@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../Service/Models/science_model.dart';
 import '../../Service/ViewModels/category_view_model.dart';
 import '../../Util/media.dart';
+import '../Widget/error_widget.dart';
 import '../Widget/item_card_widget.dart';
 import '../Widget/loading_widget.dart';
 
@@ -53,14 +54,23 @@ class _BusinessTabState extends State<BusinessTab> {
           isLoading = false;
         });
       }
-    }).onError((error, stackTrace) => onFailure(error));
+    }).onError((error, stackTrace) {
+      onFailure(error, context);
+      if(mounted){
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }).whenComplete(() {
+      if(mounted){
+        setState(() {
+          isLoading = false;
+        });
+      }
+    });;
   }
 
-  onFailure(error){
-    if (kDebugMode) {
-      print("Some error ====> $error");
-    }
-  }
+
 
   @override
   void dispose() {
