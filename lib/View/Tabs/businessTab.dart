@@ -67,7 +67,7 @@ class _BusinessTabState extends State<BusinessTab> {
           isLoading = false;
         });
       }
-    });;
+    });
   }
 
 
